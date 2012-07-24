@@ -2,7 +2,7 @@
 This gem uses the underlying data from the program "gender" by Jorg Michael (described {here}[http://www.autohotkey.com/community/viewtopic.php?t=22000]).  It's use is pretty straightforward:
 
   >> require 'sexmachine'
-  >> d = Detector.new
+  >> d = SexMachine::Detector.new
   >> d.get_gender("Bob")
   :male
   >> d.get_gender("Sally")

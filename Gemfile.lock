@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sexmachine (0.0.1)
+    sexmachine (0.0.2)
 
 GEM
   remote: http://rubygems.org/
