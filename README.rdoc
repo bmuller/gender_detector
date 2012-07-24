@@ -1,0 +1,24 @@
+= Sex Machine
+This gem uses the underlying data from the program "gender" by Jorg Michael (described [here](http://www.autohotkey.com/community/viewtopic.php?t=22000)).  It's use is pretty straightforward:
+
+  >> require 'sexmachine'
+  >> d = Detector.new
+  >> d.get_gender("Bob")
+  :male
+  >> d.get_gender("Sally")
+  :female
+  >> d.get_gender("Pauley") # should be androgynous
+  :andy 
+
+I18N is fully supported:
+
+  >> d.get_gender("Álfrún")
+  :female
+
+If you have an alterative data file, you can pass that in as an optional argument to the Detector.
+
+Try to avoid creating many Detectors, as each creation means reading in the data file.
+
+= Licenses
+The genderator code is distributed under the GPLv3.  The data file nam_dict.txt is released under the GNU Free Documentation License.
+
