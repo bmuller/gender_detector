@@ -14,6 +14,6 @@ Gem::Specification.new do |s|
   s.files = FileList["lib/**/*", "[A-Z]*", "Rakefile", "docs/**/*"]
   s.homepage = "https://github.com/bmuller/sexmachine"
   s.require_paths = ["lib"]
-  s.required_ruby_version = Gem::Requirement.new(">= 1.9.2")
+  s.required_ruby_version = Gem::Requirement.new(">= 1.9.0")
   s.rubyforge_project = "sexmachine"
 end
