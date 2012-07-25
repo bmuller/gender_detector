@@ -8,12 +8,21 @@ This gem uses the underlying data from the program "gender" by Jorg Michael (des
   >> d.get_gender("Sally")
   :female
   >> d.get_gender("Pauley") # should be androgynous
-  :andy 
+  :andy
+
+The result will be one of andy (androgynous), male, female, mostly_male, or mostly_female.  Any unknown names are considered andies.
 
 I18N is fully supported:
 
   >> d.get_gender("Álfrún")
   :female
+
+Additionally, you can give preference to specific countries:
+
+  >> d.get_gender("Jamie")
+   => :female
+  >> d.get_gender("Jamie", :great_britain)
+   => :mostly_male
 
 If you have an alterative data file, you can pass that in as an optional argument to the Detector.
 
