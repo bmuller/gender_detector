@@ -1,3 +1,5 @@
+require "unicode_utils/downcase"
+
 module SexMachine
 
   class Detector
@@ -7,9 +9,13 @@ module SexMachine
                   :greece, :russia, :belarus, :moldova, :ukraine, :armenia, :azerbaijan, :georgia, :the_stans, :turkey, :arabia, :israel, :china,
                   :india, :japan, :korea, :vietnam, :other_countries ]
 
-    def initialize(fname=nil)
-      fname ||= File.expand_path('../data/nam_dict.txt', __FILE__)
-      parse fname
+    def initialize(opts = {})
+      opts = {
+        :filename => File.expand_path('../data/nam_dict.txt', __FILE__),
+        :case_sensitive => true
+      }.merge(opts)
+      @case_sensitive = opts[:case_sensitive]
+      parse opts[:filename]
     end
     
     def parse(fname)
@@ -22,6 +28,8 @@ module SexMachine
     end
     
     def get_gender(name, country = nil)
+      name = UnicodeUtils.downcase(name) unless @case_sensitive
+
       if not @names.has_key?(name)
         :andy
       elsif country.nil?
@@ -44,13 +52,14 @@ module SexMachine
       
       parts = line.split(" ").select { |p| p.strip != "" }
       country_values = line.slice(30, line.length)
+      name = @case_sensitive ? parts[1] : UnicodeUtils.downcase(parts[1])
 
       case parts[0]
-        when "M" then set(parts[1], :male, country_values)
-        when "1M", "?M" then set(parts[1], :mostly_male, country_values)
-        when "F" then set(parts[1], :female, country_values)
-        when "1F", "?F" then set(parts[1], :mostly_female, country_values)
-        when "?" then set(parts[1], :andy, country_values)
+        when "M" then set(name, :male, country_values)
+        when "1M", "?M" then set(name, :mostly_male, country_values)
+        when "F" then set(name, :female, country_values)
+        when "1F", "?F" then set(name, :mostly_female, country_values)
+        when "?" then set(name, :andy, country_values)
         else raise "Not sure what to do with a sex of #{parts[0]}"
       end
     end
