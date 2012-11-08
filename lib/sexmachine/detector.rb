@@ -13,7 +13,7 @@ module SexMachine
       opts = {
         :filename => File.expand_path('../data/nam_dict.txt', __FILE__),
         :case_sensitive => true,
-        :unknown => true
+        :unknown => false
       }.merge(opts)
       @case_sensitive = opts[:case_sensitive]
       @unknown = opts[:unknown]
