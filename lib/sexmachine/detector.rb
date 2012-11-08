@@ -31,7 +31,7 @@ module SexMachine
       name = UnicodeUtils.downcase(name) unless @case_sensitive
 
       if not @names.has_key?(name)
-        :andy
+        :no_match
       elsif country.nil?
         most_popular_gender(name) { |country_values|
           country_values.split("").select { |l| l.strip != "" }.length
@@ -65,7 +65,7 @@ module SexMachine
     end
 
     def most_popular_gender(name)
-      return :andy unless @names.has_key?(name)
+      return :no_match unless @names.has_key?(name)
       
       max = 0
       best = @names[name].keys.first
