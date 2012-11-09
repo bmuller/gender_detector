@@ -13,10 +13,10 @@ module SexMachine
       opts = {
         :filename => File.expand_path('../data/nam_dict.txt', __FILE__),
         :case_sensitive => true,
-        :unknown => false
+        :unknown => :andy
       }.merge(opts)
       @case_sensitive = opts[:case_sensitive]
-      @unknown = opts[:unknown]
+      @unknown_value = opts[:unknown]
       parse opts[:filename]
     end
     
@@ -33,11 +33,7 @@ module SexMachine
       name = UnicodeUtils.downcase(name) unless @case_sensitive
 
       if not @names.has_key?(name)
-        if @unknown
-          :unknown
-        else
-          :andy
-        end
+        @unknown_value
       elsif country.nil?
         most_popular_gender(name) { |country_values|
           country_values.split("").select { |l| l.strip != "" }.length
@@ -72,11 +68,7 @@ module SexMachine
 
     def most_popular_gender(name)
       if not @names.has_key?(name)
-        if @unknown
-          return :unknown
-        else
-          return :andy
-        end
+          return @unknown_value
       end
       
       max = 0
