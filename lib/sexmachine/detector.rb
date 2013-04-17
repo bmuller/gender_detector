@@ -15,6 +15,7 @@ module SexMachine
         :case_sensitive => true,
         :unknown_value => :andy
       }.merge(opts)
+      @filename = opts[:filename]
       @case_sensitive = opts[:case_sensitive]
       @unknown_value = opts[:unknown_value]
       parse opts[:filename]
@@ -46,6 +47,10 @@ module SexMachine
       else
         raise "No such country: #{country}"
       end
+    end
+
+    def inspect
+      "#<#{self.class.name} filename=\"#{@filename}\" case_sensitive=#{@case_sensitive} unknown_value=#{@unknown_value}>"
     end
 
     private
