@@ -1,5 +1,5 @@
 = Sex Machine
-This gem uses the underlying data from the program "gender" by Jorg Michael (described {here}[http://www.autohotkey.com/community/viewtopic.php?t=22000]).  It's use is pretty straightforward:
+This gem uses the underlying data from the program "gender" by Jorg Michael (described {here}[http://www.autohotkey.com/community/viewtopic.php?t=22000]).  Its use is pretty straightforward:
 
   >> require 'sexmachine'
   >> d = SexMachine::Detector.new
