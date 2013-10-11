@@ -9,6 +9,25 @@ module SexMachine
                   :greece, :russia, :belarus, :moldova, :ukraine, :armenia, :azerbaijan, :georgia, :the_stans, :turkey, :arabia, :israel, :china,
                   :india, :japan, :korea, :vietnam, :other_countries ]
 
+    ISO_3166_MAPPING = {
+      'AE' => :arabia, 'AL' => :albania, 'AM' => :armenia, 'AT' => :austria,
+      'AU' => :usa, 'AZ' => :azerbaijan, 'BA' => :bosniaand, 'BE' => :belgium,
+      'BG' => :bulgaria, 'BH' => :arabia, 'BY' => :belarus, 'CA' => :usa,
+      'CH' => :swiss, 'CN' => :china, 'CZ' => :czech_republic, 'DE' => :germany,
+      'DK' => :denmark, 'EE' => :estonia, 'EG' => :arabia, 'ES' => :spain,
+      'FI' => :finland, 'FR' => :france, 'GB' => :great_britain, 'GE' => :georgia,
+      'GR' => :greece, 'HK' => :china, 'HR' => :croatia, 'HU' => :hungary,
+      'IE' => :ireland, 'IL' => :israel, 'IN' => :india, 'IS' => :iceland,
+      'IT' => :italy, 'JP' => :japan, 'KP' => :korea, 'KR' => :korea,
+      'KZ' => :the_stans, 'LT' => :lithuania, 'LU' => :luxembourg, 'LV' => :latvia,
+      'MD' => :moldova, 'ME' => :montenegro, 'MK' => :macedonia, 'MT' => :malta,
+      'NL' => :the_netherlands, 'NO' => :norway, 'PL' => :poland, 'PT' => :portugal,
+      'QA' => :arabia, 'RO' => :romania, 'RS' => :serbia, 'RU' => :russia,
+      'SA' => :arabia, 'SE' => :sweden, 'SI' => :slovenia, 'SK' => :slovakia,
+      'TR' => :turkey, 'TW' => :china, 'UA' => :ukraine, 'US' => :usa,
+      'UZ' => :the_stans, 'VN' => :vietnam
+    }
+
     def initialize(opts = {})
       opts = {
         :filename => File.expand_path('../data/nam_dict.txt', __FILE__),
@@ -30,6 +49,10 @@ module SexMachine
       }
     end
 
+    def knows_country?(country)
+      COUNTRIES.include?(country) or ISO_3166_MAPPING.include?(country)
+    end
+
     def get_gender(name, country = nil)
       name = UnicodeUtils.downcase(name) unless @case_sensitive
 
@@ -40,10 +63,9 @@ module SexMachine
           country_values.split("").select { |l| l.strip != "" }.length
         }
       elsif COUNTRIES.include?(country)
-        index = COUNTRIES.index(country)
-        most_popular_gender(name) { |country_values|
-          country_values[index].ord
-        }
+        most_popular_gender_in_country(name, country)
+      elsif ISO_3166_MAPPING.include?(country)
+        most_popular_gender_in_country(name, ISO_3166_MAPPING[country])
       else
         raise "No such country: #{country}"
       end
@@ -54,6 +76,13 @@ module SexMachine
     end
 
     private
+    def most_popular_gender_in_country(name, country)
+      index = COUNTRIES.index(country)
+      most_popular_gender(name) { |country_values|
+        country_values[index].ord
+      }
+    end
+
     def eat_name_line(line)
       return if line.start_with?("#") or line.start_with?("=")
 
