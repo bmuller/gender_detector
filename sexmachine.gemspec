@@ -16,5 +16,6 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.required_ruby_version = Gem::Requirement.new(">= 1.9.0")
   s.add_dependency('unicode_utils', '>= 1.3.0')
+  s.add_development_dependency('minitest', '4.7.5')
   s.rubyforge_project = "sexmachine"
 end
