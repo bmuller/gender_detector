@@ -53,10 +53,15 @@ module SexMachine
       COUNTRIES.include?(country) or ISO_3166_MAPPING.include?(country)
     end
 
+    def name_exists?(name)
+      name = UnicodeUtils.downcase(name) unless @case_sensitive
+      @names.has_key?(name) ? name : false
+    end
+
     def get_gender(name, country = nil)
       name = UnicodeUtils.downcase(name) unless @case_sensitive
 
-      if not @names.has_key?(name)
+      if not name_exists?(name)
         @unknown_value
       elsif country.nil?
         most_popular_gender(name) { |country_values|
@@ -126,5 +131,4 @@ module SexMachine
       end
     end
   end
-
 end
