@@ -1,4 +1,6 @@
 = Sex Machine
+{<img src="https://secure.travis-ci.org/bmuller/sexmachine.png?branch=master" alt="Build Status" />}[https://travis-ci.org/bmuller/sexmachine]
+
 This gem uses the underlying data from the program "gender" by Jorg Michael (described {here}[http://www.autohotkey.com/community/viewtopic.php?t=22000]).  Its use is pretty straightforward:
 
   >> require 'sexmachine'
