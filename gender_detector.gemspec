@@ -1,14 +1,14 @@
 # encoding: utf-8
-require File.expand_path('../lib/gender/detector/version', __FILE__)
+require File.expand_path('../lib/gender_detector/version', __FILE__)
 
 Gem::Specification.new do |s|
-  s.name = "gender-detector"
-  s.version = Gender::Detector::VERSION
+  s.name = "gender_detector"
+  s.version = GenderDetector::VERSION
 
   s.authors = ["Brian Muller"]
   s.email = ["bamuller@gmail.com"]
   s.homepage = "https://github.com/bmuller/sexmachine"
-  
+
   s.description = "Get gender from first name."
   s.summary = "Get gender from first name."
 
