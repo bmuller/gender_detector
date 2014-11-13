@@ -1,6 +1,8 @@
+require 'gender/detector/version'
+
 require "unicode_utils/downcase"
 
-module SexMachine
+module Gender
 
   class Detector
     COUNTRIES = [ :great_britain, :ireland, :usa, :italy, :malta, :portugal, :spain, :france, :belgium, :luxembourg, :the_netherlands, :east_frisia,
@@ -30,7 +32,7 @@ module SexMachine
 
     def initialize(opts = {})
       opts = {
-        :filename => File.expand_path('../data/nam_dict.txt', __FILE__),
+        :filename => File.expand_path('../detector/data/nam_dict.txt', __FILE__),
         :case_sensitive => true,
         :unknown_value => :andy
       }.merge(opts)
@@ -101,7 +103,7 @@ module SexMachine
       when "F" then set(name, :female, country_values)
       when "1F", "?F" then set(name, :mostly_female, country_values)
       when "?" then set(name, :andy, country_values)
-      else raise "Not sure what to do with a sex of #{parts[0]}"
+      else raise "Not sure what to do with a gender of #{parts[0]}"
       end
     end
 

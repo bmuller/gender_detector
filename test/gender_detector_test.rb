@@ -2,11 +2,11 @@
 require 'minitest/autorun'
 lib = File.expand_path('../../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'sexmachine'
+require 'gender/detector'
 
-class SexMachineTest < MiniTest::Test
+class GenderDetectorTest < MiniTest::Test
   def setup
-    @d = SexMachine::Detector.new
+    @d = Gender::Detector.new
   end
 
   def test_get_gender
@@ -26,13 +26,13 @@ class SexMachineTest < MiniTest::Test
   end
 
   def test_case_insensitivity
-    d = SexMachine::Detector.new(:case_sensitive => false)
+    d = Gender::Detector.new(:case_sensitive => false)
     assert_equal :female, d.get_gender("sally")
     assert_equal :female, d.get_gender("Sally")
   end
 
   def test_name_exists
-    d = SexMachine::Detector.new(:case_sensitive => false)
+    d = Gender::Detector.new(:case_sensitive => false)
     assert d.name_exists?("Sally")
     assert d.name_exists?("Carlos")
     assert d.name_exists?("Rosario")
