@@ -7,7 +7,7 @@ Gender Detector is a Ruby library that will tell you the most likely gender of a
 
 Add this line to your application's Gemfile:
 
-  gem 'robostripper'
+  gem 'gender_detector'
 
 And then execute:
 
@@ -15,7 +15,7 @@ And then execute:
 
 Or install it yourself as:
 
-  $ gem install robostripper
+  $ gem install gender_detector
 
 == Usage
 
