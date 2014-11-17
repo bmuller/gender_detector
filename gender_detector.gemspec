@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
 
   s.authors = ["Brian Muller"]
   s.email = ["bamuller@gmail.com"]
-  s.homepage = "https://github.com/bmuller/sexmachine"
+  s.homepage = "https://github.com/bmuller/gender_detector"
 
   s.description = "Get gender from first name."
   s.summary = "Get gender from first name."
