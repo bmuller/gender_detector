@@ -1,7 +1,24 @@
-= GenderDetector
+= Gender Detector
 {<img src="https://secure.travis-ci.org/bmuller/sexmachine.png?branch=master" alt="Build Status" />}[https://travis-ci.org/bmuller/sexmachine]
+Gender Detector is a Ruby library that will tell you the most likely gender of a person based on first name.  It uses the underlying data from the program "gender" by Jorg Michael (described {here}[http://www.autohotkey.com/community/viewtopic.php?t=22000]).  
 
-This gem uses the underlying data from the program "gender" by Jorg Michael (described {here}[http://www.autohotkey.com/community/viewtopic.php?t=22000]).  Its use is pretty straightforward:
+== Installation
+
+Add this line to your application's Gemfile:
+
+  gem 'robostripper'
+
+And then execute:
+
+  $ bundle
+
+Or install it yourself as:
+
+  $ gem install robostripper
+
+== Usage
+
+Its use is pretty straightforward:
 
   >> require 'gender_detector'
   >> d = GenderDetector.new
@@ -37,5 +54,5 @@ If you have an alterative data file, you can pass that in as an optional filenam
 Try to avoid creating many GenderDetectors, as each creation means reading in the data file.
 
 = Licenses
-The genderator code is distributed under the GPLv3.  The data file nam_dict.txt is released under the GNU Free Documentation License.
+The gender_detector code is distributed under the GPLv3.  The data file nam_dict.txt is released under the GNU Free Documentation License.
 
