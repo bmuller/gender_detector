@@ -133,6 +133,8 @@ class GenderDetector
     def downcase(name)
       if defined?(UnicodeUtils)
         UnicodeUtils.downcase(name)
+      elsif defined?(ActiveSupport::Multibyte::Chars)
+        name.mb_chars.downcase.to_s
       else
         name.downcase
       end
