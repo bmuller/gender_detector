@@ -37,4 +37,11 @@ class GenderDetectorTest < MiniTest::Test
     assert d.name_exists?("Carlos")
     assert d.name_exists?("Rosario")
   end
+
+  def test_works_without_dependencies
+    Object.send(:remove_const, :UnicodeUtils)
+    d = GenderDetector.new(:case_sensitive => false)
+    assert_equal :male, d.get_gender("Bob")
+    assert_equal :andy, d.get_gender("ÁLFRÚN") # doesn't work on unicode names anymore
+  end
 end
