@@ -9,8 +9,9 @@ Gem::Specification.new do |s|
   s.email = ['bamuller@gmail.com']
   s.homepage = 'https://github.com/bmuller/gender_detector'
 
-  s.description = 'Get gender from first name.'
+  s.description = 'Guess gender from first name, with multilingual support.'
   s.summary = 'Get gender from first name.'
+  s.license = 'MIT'
 
   s.require_paths = ['lib']
   s.files = Dir['lib/**/*.rb'] | Dir['lib/**/data/nam_dict.txt']
@@ -18,11 +19,10 @@ Gem::Specification.new do |s|
   s.post_install_message = "For unicode support you'll need to also "
   s.post_install_message += 'install the unicode_utils or activesupport gem'
 
-  s.add_development_dependency('rubocop', '>= 0.42.0')
-  s.add_development_dependency('minitest')
-  s.add_development_dependency('minitest-stub-const')
-  s.add_development_dependency('rake')
-  s.add_development_dependency('rdoc')
-  s.add_development_dependency('unicode_utils', '>= 1.3.0')
-  s.add_development_dependency('activesupport')
+  s.add_development_dependency('rubocop', '~> 0.42')
+  s.add_development_dependency('minitest', '~> 5.9')
+  s.add_development_dependency('rake', '~> 0')
+  s.add_development_dependency('minitest-stub-const', '~> 0.5')
+  s.add_development_dependency('unicode_utils', '~> 1.3')
+  s.add_development_dependency('activesupport', '~> 5.0')
 end
