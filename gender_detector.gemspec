@@ -16,8 +16,10 @@ Gem::Specification.new do |s|
   s.files = Dir['lib/**/*.rb'] | Dir['lib/**/data/nam_dict.txt']
   s.required_ruby_version = Gem::Requirement.new(">= 1.9.0")
 
-  s.add_dependency('unicode_utils', '>= 1.3.0')
   s.add_development_dependency('minitest')
+  s.add_development_dependency('minitest-stub-const')
   s.add_development_dependency("rake")
   s.add_development_dependency("rdoc")
+  s.add_development_dependency('unicode_utils', '>= 1.3.0')
+  s.add_development_dependency('activesupport')
 end

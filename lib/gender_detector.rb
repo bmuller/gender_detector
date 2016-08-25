@@ -1,7 +1,5 @@
 require 'gender_detector/version'
 
-require "unicode_utils/downcase"
-
 class GenderDetector
   COUNTRIES = [ :great_britain, :ireland, :usa, :italy, :malta, :portugal, :spain, :france, :belgium, :luxembourg, :the_netherlands, :east_frisia,
                 :germany, :austria, :swiss, :iceland, :denmark, :norway, :sweden, :finland, :estonia, :latvia, :lithuania, :poland, :czech_republic,
@@ -54,12 +52,12 @@ class GenderDetector
   end
 
   def name_exists?(name)
-    name = UnicodeUtils.downcase(name) unless @case_sensitive
+    name = downcase(name) unless @case_sensitive
     @names.has_key?(name) ? name : false
   end
 
   def get_gender(name, country = nil)
-    name = UnicodeUtils.downcase(name) unless @case_sensitive
+    name = downcase(name) unless @case_sensitive
 
     if not name_exists?(name)
       @unknown_value
@@ -93,7 +91,7 @@ class GenderDetector
 
     parts = line.split(" ").select { |p| p.strip != "" }
     country_values = line.slice(30, line.length)
-    name = @case_sensitive ? parts[1] : UnicodeUtils.downcase(parts[1])
+    name = @case_sensitive ? parts[1] : downcase(parts[1])
 
     case parts[0]
     when "M" then set(name, :male, country_values)
@@ -130,4 +128,15 @@ class GenderDetector
       @names[name][gender] = country_values
     end
   end
+
+  private
+    def downcase(name)
+      if defined?(UnicodeUtils)
+        UnicodeUtils.downcase(name)
+      elsif defined?(ActiveSupport::Multibyte::Chars)
+        name.mb_chars.downcase.to_s
+      else
+        name.downcase
+      end
+    end
 end
