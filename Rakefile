@@ -1,8 +1,9 @@
 require 'bundler/gem_tasks'
 require 'rdoc/task'
 require 'rake/testtask'
+require 'rubocop/rake_task'
 
-task default: [:test]
+RuboCop::RakeTask.new
 
 RDoc::Task.new('doc') do |rdoc|
   rdoc.title = 'GenderDetector - Detect gender from first name'
@@ -16,3 +17,5 @@ Rake::TestTask.new('test') do |t|
   t.libs << 'lib'
   t.test_files = FileList['test/*.rb']
 end
+
+task default: %i[rubocop test]

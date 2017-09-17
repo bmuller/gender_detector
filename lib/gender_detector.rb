@@ -2,16 +2,16 @@ require 'gender_detector/version'
 
 # Main class for interacting with the data file
 class GenderDetector
-  COUNTRIES = [:great_britain, :ireland, :usa, :italy, :malta, :portugal,
-               :spain, :france, :belgium, :luxembourg, :the_netherlands,
-               :east_frisia, :germany, :austria, :swiss, :iceland, :denmark,
-               :norway, :sweden, :finland, :estonia, :latvia, :lithuania,
-               :poland, :czech_republic, :slovakia, :hungary, :romania,
-               :bulgaria, :bosniaand, :croatia, :kosovo, :macedonia,
-               :montenegro, :serbia, :slovenia, :albania, :greece, :russia,
-               :belarus, :moldova, :ukraine, :armenia, :azerbaijan, :georgia,
-               :the_stans, :turkey, :arabia, :israel, :china, :india, :japan,
-               :korea, :vietnam, :other_countries].freeze
+  COUNTRIES = %i[great_britain ireland usa italy malta portugal
+                 spain france belgium luxembourg the_netherlands
+                 east_frisia germany austria swiss iceland denmark
+                 norway sweden finland estonia latvia lithuania
+                 poland czech_republic slovakia hungary romania
+                 bulgaria bosniaand croatia kosovo macedonia
+                 montenegro serbia slovenia albania greece russia
+                 belarus moldova ukraine armenia azerbaijan georgia
+                 the_stans turkey arabia israel china india japan
+                 korea vietnam other_countries].freeze
 
   ISO_3166_MAPPING = {
     'AE' => :arabia, 'AL' => :albania, 'AM' => :armenia, 'AT' => :austria,
@@ -70,7 +70,7 @@ class GenderDetector
       @unknown_value
     elsif country.nil?
       most_popular_gender(name) do |country_values|
-        country_values.split('').select { |l| l.strip != '' }.length
+        country_values.split('').reject { |l| l.strip == '' }.length
       end
     elsif COUNTRIES.include?(country)
       most_popular_gender_in_country(name, country)
@@ -98,7 +98,7 @@ class GenderDetector
   def eat_name_line(line)
     return if line.start_with?('#', '=')
 
-    parts = line.split(' ').select { |p| p.strip != '' }
+    parts = line.split(' ').reject { |p| p.strip == '' }
     country_values = line.slice(30, line.length)
     name = @case_sensitive ? parts[1] : downcase(parts[1])
 
@@ -139,9 +139,7 @@ class GenderDetector
   end
 
   def downcase(name)
-    if defined?(UnicodeUtils)
-      UnicodeUtils.downcase(name)
-    elsif defined?(ActiveSupport::Multibyte::Chars)
+    if defined?(ActiveSupport::Multibyte::Chars)
       name.mb_chars.downcase.to_s
     else
       name.downcase
