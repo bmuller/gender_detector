@@ -1,5 +1,9 @@
 require 'gender_detector/version'
 
+if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('2.4.0')
+  require 'active_support/core_ext/string/multibyte'
+end
+
 # Main class for interacting with the data file
 class GenderDetector
   COUNTRIES = %i[great_britain ireland usa italy malta portugal
