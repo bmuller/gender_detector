@@ -1,4 +1,4 @@
-# encoding: utf-8
+
 require File.expand_path('../lib/gender_detector/version', __FILE__)
 
 Gem::Specification.new do |s|
@@ -19,10 +19,8 @@ Gem::Specification.new do |s|
   s.post_install_message = "For unicode support you'll need to also "
   s.post_install_message += 'install the unicode_utils or activesupport gem'
 
-  s.add_development_dependency('rubocop', '~> 0.42')
-  s.add_development_dependency('minitest', '~> 5.9')
-  s.add_development_dependency('rake', '~> 0')
-  s.add_development_dependency('minitest-stub-const', '~> 0.5')
-  s.add_development_dependency('unicode_utils', '~> 1.3')
-  s.add_development_dependency('activesupport', '~> 5.0')
+  s.add_development_dependency('rubocop', '~> 0.50')
+  s.add_development_dependency('minitest', '~> 5.10')
+  s.add_development_dependency('rake', '~> 12.1')
+  s.add_development_dependency('minitest-stub-const', '~> 0.6')
 end

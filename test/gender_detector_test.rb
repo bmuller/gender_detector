@@ -1,11 +1,7 @@
-# -*- coding: utf-8 -*-
+
 require 'minitest/autorun'
 require 'minitest/stub_const'
-lib = File.expand_path('../../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'gender_detector'
-require 'unicode_utils'
-require 'active_support/core_ext/string/multibyte'
 
 class GenderDetectorTest < MiniTest::Test
   def setup
@@ -42,22 +38,9 @@ class GenderDetectorTest < MiniTest::Test
     assert d.name_exists?('Rosario')
   end
 
-  def test_uses_activesupport_if_available
-    Object.stub_remove_const(:UnicodeUtils) do
-      d = GenderDetector.new(case_sensitive: false)
-      assert_equal :male, d.get_gender('Bob')
-      assert_equal :female, d.get_gender('ÁLFRÚN')
-    end
-  end
-
-  def test_works_without_dependencies
-    Object.stub_remove_const(:UnicodeUtils) do
-      ActiveSupport::Multibyte.stub_remove_const(:Chars) do
-        d = GenderDetector.new(case_sensitive: false)
-        assert_equal :male, d.get_gender('Bob')
-        # doesn't work on unicode names anymore
-        assert_equal :andy, d.get_gender('ÁLFRÚN')
-      end
-    end
+  def test_utf8
+    d = GenderDetector.new(case_sensitive: false)
+    assert_equal :male, d.get_gender('Bob')
+    assert_equal :female, d.get_gender('ÁLFRÚN')
   end
 end
