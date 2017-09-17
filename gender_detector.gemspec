@@ -22,5 +22,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rubocop', '~> 0.50')
   s.add_development_dependency('minitest', '~> 5.10')
   s.add_development_dependency('rake', '~> 12.1')
+  # this is still needed for ruby 2.2 and 2.3
+  s.add_development_dependency('activesupport', '~> 5.1')
   s.add_development_dependency('minitest-stub-const', '~> 0.6')
 end
