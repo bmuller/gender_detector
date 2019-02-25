@@ -1,4 +1,3 @@
-
 require 'minitest/autorun'
 require 'minitest/stub_const'
 require 'gender_detector'

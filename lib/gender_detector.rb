@@ -51,7 +51,7 @@ class GenderDetector
 
   def parse(fname)
     @names = {}
-    open(fname, 'r:iso8859-1:utf-8') do |f|
+    File.open(fname, 'r:iso8859-1:utf-8') do |f|
       f.each_line do |line|
         eat_name_line line
       end

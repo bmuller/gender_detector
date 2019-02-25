@@ -1,5 +1,4 @@
-
-require File.expand_path('../lib/gender_detector/version', __FILE__)
+require File.expand_path('lib/gender_detector/version', __dir__)
 
 Gem::Specification.new do |s|
   s.name = 'gender_detector'
@@ -15,14 +14,12 @@ Gem::Specification.new do |s|
 
   s.require_paths = ['lib']
   s.files = Dir['lib/**/*.rb'] | Dir['lib/**/data/nam_dict.txt']
-  s.required_ruby_version = Gem::Requirement.new('>= 1.9.0')
+  s.required_ruby_version = Gem::Requirement.new('>= 2.4.0')
   s.post_install_message = "For unicode support you'll need to also "
   s.post_install_message += 'install the unicode_utils or activesupport gem'
 
-  s.add_development_dependency('rubocop', '~> 0.50')
-  s.add_development_dependency('minitest', '~> 5.10')
-  s.add_development_dependency('rake', '~> 12.1')
-  # this is still needed for ruby 2.2 and 2.3
-  s.add_development_dependency('activesupport', '~> 5.1')
+  s.add_development_dependency('minitest', '~> 5.11')
   s.add_development_dependency('minitest-stub-const', '~> 0.6')
+  s.add_development_dependency('rake', '~> 12.3')
+  s.add_development_dependency('rubocop', '~> 0.65')
 end
