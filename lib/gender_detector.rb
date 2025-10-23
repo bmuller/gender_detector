@@ -143,10 +143,6 @@ class GenderDetector
   end
 
   def downcase(name)
-    if defined?(ActiveSupport::Multibyte::Chars)
-      name.mb_chars.downcase.to_s
-    else
-      name.downcase
-    end
+    name.downcase
   end
 end
