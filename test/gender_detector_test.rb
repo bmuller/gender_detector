@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require 'minitest/stub_const'
 require 'gender_detector'
 
-class GenderDetectorTest < MiniTest::Test
+class GenderDetectorTest < Minitest::Test
   def setup
     @d = GenderDetector.new
   end
