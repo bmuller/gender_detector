@@ -6,8 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: [ '2.3.0', '3.4.2' ]
-    name: Python ${{ matrix.python-version }}
+        ruby-version: [ '3.4.2' ]
+    name: Ruby ${{ matrix.ruby-version }}
     steps:
       - uses: actions/checkout@v5
       - uses: ruby/setup-ruby@v1
