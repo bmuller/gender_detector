@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
 
   s.description = 'Guess gender from first name, with multilingual support.'
   s.summary = 'Get gender from first name.'
-  s.license = 'MIT'
+  s.license = 'GPL-3.0'
 
   s.require_paths = ['lib']
   s.files = Dir['lib/**/*.rb'] | Dir['lib/**/data/nam_dict.txt']
