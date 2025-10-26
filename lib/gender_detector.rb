@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 require 'gender_detector/version'
 
-if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('2.4.0')
-  require 'active_support/core_ext/string/multibyte'
-end
+require 'active_support/core_ext/string/multibyte' if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('2.4.0')
 
 # Main class for interacting with the data file
 class GenderDetector
@@ -20,7 +20,7 @@ class GenderDetector
   ISO_3166_MAPPING = {
     'AE' => :arabia, 'AL' => :albania, 'AM' => :armenia, 'AT' => :austria,
     'AU' => :usa, 'AZ' => :azerbaijan, 'BA' => :bosniaand, 'BE' => :belgium,
-    'BG' => :bulgaria, 'BH' => :arabia, 'BY' => :belarus, 'CA' => :usa,
+    'BG' => :bulgaria, 'BR' => :portugal, 'BH' => :arabia, 'BY' => :belarus, 'CA' => :usa,
     'CH' => :swiss, 'CN' => :china, 'CZ' => :czech_republic, 'DE' => :germany,
     'DK' => :denmark, 'EE' => :estonia, 'EG' => :arabia, 'ES' => :spain,
     'FI' => :finland, 'FR' => :france, 'GB' => :great_britain, 'GE' => :georgia,
@@ -63,18 +63,18 @@ class GenderDetector
   end
 
   def name_exists?(name)
-    name = downcase(name) unless @case_sensitive
+    name = name.downcase unless @case_sensitive
     @names.key?(name) ? name : false
   end
 
   def get_gender(name, country = nil)
-    name = downcase(name) unless @case_sensitive
+    name = name.downcase unless @case_sensitive
 
     if !name_exists?(name)
       @unknown_value
     elsif country.nil?
       most_popular_gender(name) do |country_values|
-        country_values.split('').reject { |l| l.strip == '' }.length
+        country_values.chars.reject { |l| l.strip == '' }.length
       end
     elsif COUNTRIES.include?(country)
       most_popular_gender_in_country(name, country)
@@ -86,8 +86,8 @@ class GenderDetector
   end
 
   def inspect
-    "#<#{self.class.name} filename=\"#{@filename}\" " \
-      " case_sensitive=#{@case_sensitive} unknown_value=#{@unknown_value}>"
+    "#<#{self.class.name} filename=\"#{@filename}\"  " \
+      "case_sensitive=#{@case_sensitive} unknown_value=#{@unknown_value}>"
   end
 
   private
@@ -102,11 +102,14 @@ class GenderDetector
   def eat_name_line(line)
     return if line.start_with?('#', '=')
 
-    parts = line.split(' ').reject { |p| p.strip == '' }
+    parts = line.split.reject { |p| p.strip == '' }
     country_values = line.slice(30, line.length)
-    name = @case_sensitive ? parts[1] : downcase(parts[1])
+    name = @case_sensitive ? parts[1] : parts[1].downcase
+    set_name_gender(name, parts[0], country_values)
+  end
 
-    case parts[0]
+  def set_name_gender(name, gender, country_values)
+    case gender
     when 'M' then set(name, :male, country_values)
     when '1M', '?M' then set(name, :mostly_male, country_values)
     when 'F' then set(name, :female, country_values)
@@ -139,14 +142,6 @@ class GenderDetector
     else
       @names[name] ||= {}
       @names[name][gender] = country_values
-    end
-  end
-
-  def downcase(name)
-    if defined?(ActiveSupport::Multibyte::Chars)
-      name.mb_chars.downcase.to_s
-    else
-      name.downcase
     end
   end
 end

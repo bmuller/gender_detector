@@ -15,11 +15,14 @@ Metrics/AbcSize:
 Metrics/ClassLength:
   Max: 128
 
-# Offense count: 1
-Metrics/CyclomaticComplexity:
-  Max: 8
-
 # Offense count: 3
 # Configuration parameters: CountComments.
 Metrics/MethodLength:
   Max: 14
+
+AllCops:
+  NewCops: enable
+
+plugins:
+  - rubocop-minitest
+  - rubocop-rake
