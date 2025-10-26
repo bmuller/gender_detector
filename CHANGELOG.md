@@ -7,3 +7,4 @@
  * Updated code to fix formatting / style / linting issues
  * Add a CHANGELOG
  * Clarified license is GPL-3.0 in Gemspec (h/t @andrew via #18)
+ * Fixed issue with country mapping for Brazil (h/t @jayelkaake via #19)

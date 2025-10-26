@@ -20,7 +20,7 @@ class GenderDetector
   ISO_3166_MAPPING = {
     'AE' => :arabia, 'AL' => :albania, 'AM' => :armenia, 'AT' => :austria,
     'AU' => :usa, 'AZ' => :azerbaijan, 'BA' => :bosniaand, 'BE' => :belgium,
-    'BG' => :bulgaria, 'BH' => :arabia, 'BY' => :belarus, 'CA' => :usa,
+    'BG' => :bulgaria, 'BR' => :portugal, 'BH' => :arabia, 'BY' => :belarus, 'CA' => :usa,
     'CH' => :swiss, 'CN' => :china, 'CZ' => :czech_republic, 'DE' => :germany,
     'DK' => :denmark, 'EE' => :estonia, 'EG' => :arabia, 'ES' => :spain,
     'FI' => :finland, 'FR' => :france, 'GB' => :great_britain, 'GE' => :georgia,
