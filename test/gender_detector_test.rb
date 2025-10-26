@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 require 'minitest/autorun'
-require 'minitest/stub_const'
 require 'gender_detector'
 
 class GenderDetectorTest < Minitest::Test
@@ -26,12 +27,14 @@ class GenderDetectorTest < Minitest::Test
 
   def test_case_insensitivity
     d = GenderDetector.new(case_sensitive: false)
+
     assert_equal :female, d.get_gender('sally')
     assert_equal :female, d.get_gender('Sally')
   end
 
   def test_name_exists
     d = GenderDetector.new(case_sensitive: false)
+
     assert d.name_exists?('Sally')
     assert d.name_exists?('Carlos')
     assert d.name_exists?('Rosario')
@@ -39,6 +42,7 @@ class GenderDetectorTest < Minitest::Test
 
   def test_utf8
     d = GenderDetector.new(case_sensitive: false)
+
     assert_equal :male, d.get_gender('Bob')
     assert_equal :female, d.get_gender('ÁLFRÚN')
   end
