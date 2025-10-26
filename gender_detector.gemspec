@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
   s.files = Dir['lib/**/*.rb'] | Dir['lib/**/data/nam_dict.txt']
   s.required_ruby_version = Gem::Requirement.new('>= 2.7.0')
+  s.extra_rdoc_files = ['LICENSE', 'README.md']
 
   s.metadata = {
     'changelog_uri' => "https://github.com/bmuller/gender_detector/releases/tag/v#{GenderDetector::VERSION}",

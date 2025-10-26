@@ -1,22 +1,28 @@
-= Gender Detector
+# Gender Detector
 
 Gender Detector is a Ruby library that will tell you the most likely gender of a person based on first name.  It uses the underlying data from the program "gender" by Jorg Michael (described {here}[http://www.autohotkey.com/community/viewtopic.php?t=22000]).
 
-== Installation
+## Installation
 
 Add this line to your application's Gemfile:
 
-  gem 'gender_detector'
+```ruby
+gem 'gender_detector'
+```
 
 And then execute:
 
-  $ bundle
+```sh
+bundle
+```
 
 Or install it yourself as:
 
-  $ gem install gender_detector
+```sh
+gem install gender_detector
+```
 
-== Usage
+## Usage
 
 Its use is pretty straightforward:
 
@@ -66,5 +72,5 @@ d.get_gender "Sally"
 
 Try to avoid creating many GenderDetectors, as each creation means reading in the data file.
 
-= Licenses
+## Licenses
 The gender_detector code is distributed under the GPLv3.  The data file nam_dict.txt is released under the GNU Free Documentation License.
