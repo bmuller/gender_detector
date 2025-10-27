@@ -1,6 +1,6 @@
 # Gender Detector
 
-Gender Detector is a Ruby library that will tell you the most likely gender of a person based on first name.  It uses the underlying data from the program "gender" by Jorg Michael (described [here](http://www.autohotkey.com/community/viewtopic.php?t=22000).
+Gender Detector is a Ruby library that will tell you the most likely gender of a person based on first name.  It uses the underlying data from the program "gender" by Jorg Michael (described [here](http://www.autohotkey.com/community/viewtopic.php?t=22000)).
 
 ## Installation
 
@@ -30,23 +30,23 @@ Its use is pretty straightforward:
 require 'gender_detector'
 d = GenderDetector.new
 
-# this will return :male
-p d.get_gender("Bob")
+d.get_gender("Bob")
+# => :male
 
-# this will print :female
-p d.get_gender("Sally")
+d.get_gender("Sally")
+# => :female
 
-# and this will print :andy, which indicates an androgynous result
-d.get_gender("Pauley") # should be androgynous
+d.get_gender("Pauley")
+# => :andy
 ```
 
-The result will be one of andy (androgynous), male, female, mostly_male, or mostly_female.  Any unknown names are considered andies.
+The result will be one of `:andy` (androgynous), `:male`, `:female`, `:mostly_male`, or `:mostly_female`.  Any unknown names are considered andies.
 
 Gender detection will work for names with non-ASCII characters as well:
 
 ```ruby
-# will return :female
 d.get_gender("Álfrún")
+# => :female
 ```
 
 Additionally, you can give preference to specific countries:
@@ -59,7 +59,7 @@ d.get_gender("Jamie", :great_britain)
 # => :mostly_male
 ````
 
-If you have an alterative data file, you can pass that in as an optional filename argument to the GenderDetector.  Additionally, you can create a detector that is not case sensitive (default *is* to be case sensitive):
+If you have an alterative data file, you can pass that in as an optional filename argument to the `GenderDetector`.  Additionally, you can create a detector that is not case sensitive (default *is* to be case sensitive):
 
 ```ruby
 d = GenderDetector.new(:case_sensitive => false)
@@ -70,7 +70,7 @@ d.get_gender "Sally"
 # => :female
 ```
 
-Try to avoid creating many GenderDetectors, as each creation means reading in the data file.
+Try to avoid creating many `GenderDetectors`, as each creation means reading in the data file.
 
 ## Licenses
 The gender_detector code is distributed under the GPLv3.  The data file nam_dict.txt is released under the GNU Free Documentation License.
